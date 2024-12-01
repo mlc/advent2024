@@ -2,8 +2,8 @@
   "imports": {
     "collections/": "https://deno.land/std@0.208.0/collections/",
     "streams": "https://deno.land/std@0.208.0/streams/mod.ts",
-    "@js-joda/core": "npm:@js-joda/core@5.6.1",
-    "@js-joda/timezone": "npm:@js-joda/timezone@2.18.2",
+    "@js-joda/core": "npm:@js-joda/core@5.6.3",
+    "@js-joda/timezone": "npm:@js-joda/timezone@2.21.1",
     "mnemonist": "npm:mnemonist@0.39.5",
     "imagescript": "https://deno.land/x/imagescript@1.2.17/mod.ts",
     "dejs": "https://deno.land/x/dejs@0.10.3/mod.ts",
