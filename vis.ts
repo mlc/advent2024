@@ -1,10 +1,15 @@
 import { Image } from 'imagescript';
 
+interface Opts {
+  blocksize?: number;
+  padding?: number;
+  color?: number;
+  filename?: string;
+}
+
 export const showGrid = async (
   pixels: boolean[][],
-  blocksize = 8,
-  padding = 4,
-  filename?: string,
+  { blocksize = 8, padding = 4, color = 0x11aa11ff, filename }: Opts = {},
 ): Promise<void> => {
   const height = pixels.length;
   const width = pixels[0].length;
@@ -22,7 +27,7 @@ export const showGrid = async (
         y * blocksize + padding,
         blocksize,
         blocksize,
-        val ? 0x11aa11ff : 0x111111ff,
+        val ? color : 0x111111ff,
       );
     })
   );
@@ -31,14 +36,14 @@ export const showGrid = async (
   if (filename) {
     await Deno.writeFile(filename, png);
   } else {
-    const process = Deno.run({
-      cmd: ['display'],
+    const process = new Deno.Command('display', {
       stdin: 'piped',
       stderr: 'inherit',
       stdout: 'inherit',
-    });
-    await process.stdin.write(png);
-    await process.stdin.close();
-    await process.status();
+    }).spawn();
+    const writer = process.stdin.getWriter();
+    await writer.write(png);
+    await writer.close();
+    await process.status;
   }
 };

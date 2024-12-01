@@ -3,6 +3,7 @@
   "specifiers": {
     "npm:@js-joda/core@5.6.3": "5.6.3",
     "npm:@js-joda/timezone@2.21.1": "2.21.1_@js-joda+core@5.6.3",
+    "npm:imagescript@1.3.0": "1.3.0",
     "npm:lint-staged@*": "15.2.10",
     "npm:mnemonist@0.39.5": "0.39.5"
   },
@@ -107,6 +108,9 @@
     },
     "human-signals@5.0.0": {
       "integrity": "sha512-AXcZb6vzzrFAUE61HnN4mpLqd/cSIwNQjtNWR0euPm6y0iqx3G4gOXaIDdtdDwZmhwe82LA6+zinmW4UBWVePQ=="
+    },
+    "imagescript@1.3.0": {
+      "integrity": "sha512-lCYzQrWzdnA68K03oMj/BUlBJrVBnslzDOgGFymAp49NmdGEJxGeN7sHh5mCva0nQkq+kkKSuru2zLf1m04+3A=="
     },
     "is-fullwidth-code-point@4.0.0": {
       "integrity": "sha512-O4L094N2/dZ7xqVdrXhh9r1KODPJpFms8B5sGdJLPy664AgvXsreZUyCQQNItZRDlYug4xStLjNp/sz3HvBowQ=="
