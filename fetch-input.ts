@@ -36,7 +36,7 @@ const cookie = await Deno.readTextFile(
 const resp = await fetch(`https://adventofcode.com/${year}/day/${day}/input`, {
   headers: {
     Cookie: cookie,
-    'User-Agent': 'mlc-advent/0.1 github.com/mlc/advent2022',
+    'User-Agent': 'mlc-advent/0.1 github.com/mlc/advent2024',
   },
 });
 
