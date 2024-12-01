@@ -159,6 +159,11 @@ export const zipWith = <T1, T2, R>(
   fn: (arg1: T1, arg2: T2) => R,
 ): R[] => arr1.map((e1, idx) => fn(e1, arr2[idx]));
 
+export const zip = <T1, T2>(
+  arr1: readonly T1[],
+  arr2: readonly T2[],
+): [T1, T2][] => zipWith(arr1, arr2, (a, b) => [a, b]);
+
 export const gcd = (x: number, y: number): number => {
   if (
     (!Number.isSafeInteger(x) && !Number.isSafeInteger(y)) ||
