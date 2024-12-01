@@ -109,8 +109,7 @@ export const neighbors = (
 
 export const show = async (data: string | number | bigint) => {
   console.log(data);
-  const child = new Deno.Command('xclip', {
-    args: ['-i', '-selection', 'clipboard'],
+  const child = new Deno.Command('wl-copy', {
     stdin: 'piped',
     stdout: 'inherit',
     stderr: 'inherit',
@@ -123,7 +122,7 @@ export const show = async (data: string | number | bigint) => {
   await pipe;
   const status = await child.status;
   if (!status.success) {
-    throw new Error('xclip failed');
+    throw new Error('wl-copy failed');
   }
 };
 
