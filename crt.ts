@@ -35,7 +35,7 @@ const mulInv = (a: bigint, b: bigint): bigint => {
 
 export const chineseRemainder = (
   a: readonly bigint[],
-  n: readonly bigint[]
+  n: readonly bigint[],
 ): bigint => {
   let p = 1n;
   let prod = 1n;
@@ -52,5 +52,5 @@ export const chineseRemainder = (
 
 export const chineseRemainderInt = (
   a: readonly number[],
-  n: readonly number[]
+  n: readonly number[],
 ): number => Number(chineseRemainder(a.map(BigInt), n.map(BigInt)));

@@ -11,7 +11,7 @@ export const showGrid = async (
 
   const img = new Image(
     width * blocksize + 2 * padding,
-    height * blocksize + 2 * padding
+    height * blocksize + 2 * padding,
   );
 
   img.fill(0xff);
@@ -22,7 +22,7 @@ export const showGrid = async (
         y * blocksize + padding,
         blocksize,
         blocksize,
-        val ? 0x11aa11ff : 0x111111ff
+        val ? 0x11aa11ff : 0x111111ff,
       );
     })
   );

@@ -1,9 +1,9 @@
-import { Pair, readSplit, show, sumBy, zipWith } from "./util.ts";
-import { MultiSet } from "mnemonist";
+import { Pair, readSplit, show, sumBy, zipWith } from './util.ts';
+import { MultiSet } from 'mnemonist';
 
 const parse = (x: string) => x.split(/ +/).map(Number) as Pair<number>;
 
-const input = (await readSplit(1, "\n", false)).map(parse);
+const input = (await readSplit(1, '\n', false)).map(parse);
 
 const l1 = input.map(([a]) => a).sort();
 const l2 = input.map(([, b]) => b).sort();

@@ -11,7 +11,7 @@ const exists = (fn: string): Promise<boolean> =>
       } else {
         return Promise.reject(err);
       }
-    }
+    },
   );
 
 const now = ZonedDateTime.now(ZoneId.of('America/New_York'));
@@ -30,7 +30,7 @@ if (await exists(filename)) {
 }
 
 const cookie = await Deno.readTextFile(
-  Deno.env.get('HOME')! + '/.aoccookie'
+  Deno.env.get('HOME')! + '/.aoccookie',
 ).then((d) => d.trim());
 
 const resp = await fetch(`https://adventofcode.com/${year}/day/${day}/input`, {

@@ -8,18 +8,18 @@ export function sumBy(array: ArrayLike<number> | ArrayLike<boolean>): number;
 
 export function sumBy<T>(
   array: ArrayLike<T>,
-  validator: (elt: T, index: number) => number | boolean
+  validator: (elt: T, index: number) => number | boolean,
 ): number;
 
 export function sumBy<T>(
   array: ArrayLike<T>,
-  validator: (elt: any, index: number) => number | boolean = identity
+  validator: (elt: any, index: number) => number | boolean = identity,
 ): number {
   return Array.prototype.reduce.call(
     array,
     (accum: unknown, element: T, index: number) =>
       (accum as number) + (validator(element, index) as number),
-    0
+    0,
   ) as number;
 }
 
@@ -27,16 +27,16 @@ export function productBy(array: readonly number[]): number;
 
 export function productBy<T>(
   array: readonly T[],
-  validator: (elt: T, index: number) => number
+  validator: (elt: T, index: number) => number,
 ): number;
 
 export function productBy<T>(
   array: readonly T[],
-  validator: (elt: any, index: number) => number = identity
+  validator: (elt: any, index: number) => number = identity,
 ): number {
   return array.reduce(
     (accum, element, index) => accum * validator(element, index),
-    1
+    1,
   );
 }
 
@@ -46,7 +46,7 @@ export const inputFilename = (day: number, t: boolean) =>
 export const readSplit = (
   day: number,
   separator = '\n',
-  t = false
+  t = false,
 ): Promise<string[]> =>
   Deno.readTextFile(inputFilename(day, t)).then((str) =>
     str.trim().split(separator)
@@ -65,7 +65,7 @@ export const setIntersect = <T>(
 
 export const mapChars = (
   str: string,
-  op: (ch: string, index: number) => string
+  op: (ch: string, index: number) => string,
 ) => {
   const arr = new Array(str.length);
   for (let i = 0; i < str.length; ++i) {
@@ -90,7 +90,7 @@ export type Coord = [number, number];
 export const neighbors = (
   [x, y]: Coord,
   includeDiagonals = false,
-  includeSelf = false
+  includeSelf = false,
 ): Coord[] => {
   const result: Coord[] = [
     [x - 1, y],
@@ -136,7 +136,7 @@ export const getNums = (target: string, onlyPositive = true): number[] =>
 
 export const forEach2D = <T>(
   arr: T[][],
-  fn: ([x, y]: Coord, val: T) => void
+  fn: ([x, y]: Coord, val: T) => void,
 ) => {
   for (let x = 0; x < arr.length; ++x) {
     for (let y = 0; y < arr[x].length; ++y) {
@@ -147,7 +147,7 @@ export const forEach2D = <T>(
 
 export const map2D = <T, R>(
   arr: T[][],
-  fn: ([x, y]: Coord, val: T) => R
+  fn: ([x, y]: Coord, val: T) => R,
 ): R[][] => arr.map((row, x) => row.map((elt, y) => fn([x, y], elt)));
 
 export const inBounds = (arr: any[][], [x, y]: Coord): boolean =>
@@ -156,7 +156,7 @@ export const inBounds = (arr: any[][], [x, y]: Coord): boolean =>
 export const zipWith = <T1, T2, R>(
   arr1: readonly T1[],
   arr2: readonly T2[],
-  fn: (arg1: T1, arg2: T2) => R
+  fn: (arg1: T1, arg2: T2) => R,
 ): R[] => arr1.map((e1, idx) => fn(e1, arr2[idx]));
 
 export const gcd = (x: number, y: number): number => {
