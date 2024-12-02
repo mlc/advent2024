@@ -1,7 +1,6 @@
 import '@js-joda/timezone';
 import { ZonedDateTime, ZoneId } from '@js-joda/core';
 import { renderFileToString } from 'dejs';
-import { exec } from 'execute';
 
 const now = ZonedDateTime.now(ZoneId.of('America/New_York'));
 const date = now
@@ -19,4 +18,11 @@ await encoder.readable.pipeTo(file.writable);
 
 console.log(`wrote ${filename}`);
 
-await exec(['git', 'add', filename]);
+const gitCommand = new Deno.Command('git', {
+  args: ['add', filename],
+});
+
+const output = await gitCommand.output();
+if (!output.success) {
+  throw new Error(new TextDecoder().decode(output.stderr));
+}
