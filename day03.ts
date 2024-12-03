@@ -1,3 +1,4 @@
+// deno-lint-ignore-file no-cond-assign
 import { inputFilename, Pair, show, sumBy } from './util.ts';
 
 const input = await Deno.readTextFile(inputFilename(3, false));
