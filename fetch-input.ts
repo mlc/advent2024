@@ -15,7 +15,7 @@ const exists = (fn: string): Promise<boolean> =>
   );
 
 const now = ZonedDateTime.now(ZoneId.of('America/New_York'));
-const day = now.dayOfMonth();
+const day = Deno.args.length === 1 ? parseInt(Deno.args[0]) : now.dayOfMonth();
 const year = now.year();
 
 if (now.month() !== Month.DECEMBER || day >= 26) {

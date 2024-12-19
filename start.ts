@@ -3,7 +3,7 @@ import { ZonedDateTime, ZoneId } from '@js-joda/core';
 import { renderFileToString } from 'dejs';
 
 const now = ZonedDateTime.now(ZoneId.of('America/New_York'));
-const date = now
+const date = Deno.args.length === 1 ? parseInt(Deno.args[0]) : now
   .toLocalDate()
   .plusDays(now.hour() >= 12 ? 1 : 0)
   .dayOfMonth();
