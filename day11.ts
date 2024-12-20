@@ -1,4 +1,5 @@
 import { range, readSplit, show } from './util.ts';
+import { MultiSet } from 'mnemonist';
 
 const parse = (x: string) => parseInt(x);
 
@@ -25,11 +26,16 @@ for (const day of range(0, 25)) {
 
 await show(stones.length);
 
-stones = input;
+let stones2 = MultiSet.from(input);
 
 for (const day of range(0, 75)) {
-  stones = stones.flatMap(step);
-  console.log({ day, l: stones.length });
+  const nextStones = new MultiSet<number>();
+  for (const [n, count] of stones2.multiplicities()) {
+    for (const x of step(n)) {
+      nextStones.add(x, count);
+    }
+  }
+  stones2 = nextStones;
 }
 
-await show(stones.length);
+await show(stones2.size);
