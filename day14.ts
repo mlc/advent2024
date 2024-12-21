@@ -59,7 +59,7 @@ const pad = (n: number) => {
   }
 };
 
-for (const step of range(0, 2000)) {
+O: for (const step of range(0, width * height)) {
   if (step % 100 === 0) {
     console.log({ step });
   }
@@ -67,6 +67,9 @@ for (const step of range(0, 2000)) {
     new Array(width).fill(false)
   );
   for (const [x, y] of after(step)) {
+    if (grid[y][x]) {
+      continue O;
+    }
     grid[y][x] = true;
   }
   await showGrid(grid, { filename: `day14-step${pad(step)}.png` });
