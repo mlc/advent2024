@@ -79,6 +79,9 @@ export const addVectors = (
   ...vectors: readonly number[][]
 ): number[] => vector.map((x, i) => vectors.reduce((a, v) => a + v[i], x));
 
+export const scaleCoord = (p: Coord, factor: number): Coord =>
+  p.map((x) => x * factor) as Coord;
+
 export function* range(start: number, end: number, step = 1) {
   for (let i = start; i < end; i += step) {
     yield i;
@@ -152,6 +155,17 @@ export const map2D = <T, R>(
 
 export const inBounds = (arr: any[][], [x, y]: Coord): boolean =>
   x >= 0 && y >= 0 && x < arr.length && y < arr[x].length;
+
+export const find2D = <T>(arr: T[][], target: T): Coord => {
+  for (let i = 0; i < arr.length; ++i) {
+    for (let j = 0; j < arr[i].length; j++) {
+      if (arr[i][j] === target) {
+        return [i, j];
+      }
+    }
+  }
+  throw new Error('not found');
+};
 
 export const zipWith = <T1, T2, R>(
   arr1: readonly T1[],

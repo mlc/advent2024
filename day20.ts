@@ -1,23 +1,12 @@
-import { Coord, neighbors, readSplit, show } from './util.ts';
+import { Coord, find2D, neighbors, readSplit, show } from './util.ts';
 import { MultiMap } from 'mnemonist';
 
 const parse = (x: string) => x.split('');
 
 const input = (await readSplit(20, '\n', false)).map(parse);
 
-const find = (ch: string): Coord => {
-  for (let i = 0; i < input.length; ++i) {
-    for (let j = 0; j < input[i].length; j++) {
-      if (input[i][j] === ch) {
-        return [i, j];
-      }
-    }
-  }
-  throw new Error('not found');
-};
-
-const start = find('S');
-const end = find('E').join(',');
+const start = find2D(input, 'S');
+const end = find2D(input, 'E').join(',');
 
 const duration = (cheats: Coord[] = []): number => {
   const seen = new Set<string>();
