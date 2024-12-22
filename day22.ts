@@ -1,4 +1,6 @@
 import { readSplit, show, sumBy } from './util.ts';
+import { slidingWindows } from '@std/collections';
+import { MultiSet } from 'mnemonist';
 
 const parse = (x: string) => parseInt(x, 10);
 
@@ -35,46 +37,36 @@ const allPrices = (n: number, i: number = 2000) => {
 const diffs = (ns: number[]): (number | undefined)[] =>
   ns.map((n, i) => (i === 0 ? undefined : n - ns[i - 1]));
 
-type M = { ps: number[]; ds: (number | undefined)[] };
+interface M {
+  ps: number[];
+  ds: (number | undefined)[];
+  vals: Map<string, number>;
+}
 
 const monkeys: M[] = input.map((n) => {
   const ps = allPrices(n);
-  return { ps, ds: diffs(ps) };
+  const ds = diffs(ps);
+  const vals = new Map<string, number>();
+  const wins = slidingWindows(ds, 4);
+  wins.forEach((win, i) => {
+    if (i === 0) {
+      return;
+    }
+    const key = win.join(',');
+    if (vals.has(key)) {
+      return;
+    }
+    vals.set(key, ps[i + 3]);
+  });
+  return { ps, ds, vals };
 });
 
-const eq = (as: number[], bs: (number | undefined)[], offset: number) => {
-  for (let i = 0; i < as.length; i++) {
-    if (as[i] !== bs[i + offset]) {
-      return false;
-    }
-  }
-  return true;
-};
+const prices = new MultiSet<string>();
 
-const value = ({ ps, ds }: M, seq: number[]) => {
-  for (let i = 1; i < ds.length; i++) {
-    if (eq(seq, ds, i)) {
-      return ps[i + seq.length - 1];
-    }
-  }
-  return 0;
-};
-
-// console.log(diffs(allPrices(123, 10)));
-
-//console.log(monkeys.map(m => value(m, [-2,1,-1,3])))
-let best = 0;
-for (let a = -9; a <= 9; ++a) {
-  for (let b = -9; b <= 9; ++b) {
-    console.log({ a, b });
-    for (let c = -9; c <= 9; ++c) {
-      for (let d = -9; d <= 9; ++d) {
-        const seq = [a, b, c, d];
-        const trial = sumBy(monkeys, (m) => value(m, seq));
-        best = Math.max(trial, best);
-      }
-    }
+for (const { vals } of monkeys) {
+  for (const [k, price] of vals.entries()) {
+    prices.add(k, price);
   }
 }
 
-await show(best);
+await show(prices.top(1)[0][1]);
