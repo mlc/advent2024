@@ -137,6 +137,11 @@ export const getNums = (target: string, onlyPositive = true): number[] =>
     .match(onlyPositive ? posDigits : digits)
     ?.map((n) => parseInt(n, 10)) ?? [];
 
+export const getBigNums = (target: string): bigint[] =>
+  target
+    .match(digits)
+    ?.map((n) => BigInt(n)) ?? [];
+
 export const forEach2D = <T>(
   arr: T[][],
   fn: ([x, y]: Coord, val: T) => void,
@@ -226,3 +231,6 @@ export const gcdMany = (...ns: readonly number[]) => ns.reduce(gcd);
 
 export const lcm = (...ns: readonly number[]) =>
   ns.reduce((a, b) => (a / gcd(a, b)) * b, 1);
+
+export const lcmBig = (...ns: readonly bigint[]) =>
+  ns.reduce((a, b) => (a / gcdBig(a, b)) * b, 1n);
